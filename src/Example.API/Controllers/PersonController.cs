@@ -22,6 +22,7 @@ namespace Stefanini.Challenge.API.Controllers
             try
             {
                 var action = await _personService.GetAllAsync();
+
                 return Ok(action);
             }
             catch (Exception ex)
@@ -36,6 +37,7 @@ namespace Stefanini.Challenge.API.Controllers
             try
             {
                 var action = await _personService.GetAsync(id);
+
                 return Ok(action);
             }
             catch (ArgumentException ex)
@@ -54,6 +56,7 @@ namespace Stefanini.Challenge.API.Controllers
             try
             {
                 var action = await _personService.CreateAsync(request);
+
                 return Ok(action);
             }
             catch (ArgumentException ex)
@@ -72,6 +75,7 @@ namespace Stefanini.Challenge.API.Controllers
             try
             {
                 var action = await _personService.UpdateAsync(id, request);
+
                 return Ok(action);
             }
             catch (ArgumentException ex)
@@ -90,6 +94,7 @@ namespace Stefanini.Challenge.API.Controllers
             try
             {
                 var action = await _personService.DeleteAsync(id);
+
                 return Ok(action);
             }
             catch (ArgumentException ex)
