@@ -37,6 +37,8 @@ using (var scope = app.Services.CreateScope())
     dataContext.Database.Migrate();
 }
 
+app.UseCors("corsapp");
+
 app.UseAuthorization();
 
 app.MapControllers();
