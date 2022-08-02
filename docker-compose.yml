@@ -1,0 +1,33 @@
+version: '3.4'
+
+services:
+  stefanini.challenge.api:
+    image: ${DOCKER_REGISTRY-}stefaninichallengeapi
+    depends_on:
+    - sqldata
+    build:
+      context: .
+      dockerfile: src/Example.API/Dockerfile
+    environment:
+      DBConnection: "Data Source=sqldata,1433;Initial Catalog=master;Persist Security Info=True;User ID=sa;Password=Stefanini@123"
+
+  web:
+    image: ${DOCKER_REGISTRY-}web
+    depends_on: 
+    - stefanini.challenge.api
+    build: 
+      context: .
+      dockerfile: src/Crud.Web/Docker/Dockerfile
+      args:
+        VUE_APP_API_URL: http://localhost:8080
+    ports:
+      -  "8080:80"
+
+  sqldata:
+    image: mcr.microsoft.com/mssql/server:2017-latest
+    environment:
+      - SA_PASSWORD=Stefanini@123
+      - ACCEPT_EULA=Y
+      - MSSQL_PID=Developer
+    ports:
+      - "5434:1433"
